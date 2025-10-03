@@ -33,7 +33,7 @@ const ScrollUnstackCards = () => {
   return (
     <section className="relative py-40 w-full bg-transparent">
       {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100/50 to-purple-100/50 dark:from-gray-900/50 dark:to-gray-800/50" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-purple-400/50 to-purple-400/50 dark:from-gray-900/50 dark:to-gray-800/50" />
 
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-24">

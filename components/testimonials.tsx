@@ -1,125 +1,150 @@
 "use client"
 
+import React, { useRef } from "react"
+
 const testimonials = [
   {
-    name: "Sarah Jones",
-    role: "Artist",
+    name: "Ronald Richards",
+    role: "Laravel developer",
     avatar: "/professional-woman-artist.jpg",
     content:
-      "MoonScale is the best AI animation studio! I can brainstorm ideas and get stunning visuals in seconds. It helps me overcome creative block and explore new artistic directions.",
+      "Working with Emma Taylor was one of the best decisions we made for our brand. The entire process was smooth, collaborative.",
+    rating: 4.9
   },
   {
-    name: "Emily Brown",
-    role: "Marketing Specialist",
-    avatar: "/professional-woman-marketing.png",
-    content:
-      "MoonScale is a fantastic AI animation studio for creating social media graphics and marketing materials. It helps me generate eye-catching visuals that resonate with our target audience.",
-  },
-  {
-    name: "Katherine Lee",
-    role: "Musician",
-    avatar: "/professional-woman-musician.jpg",
-    content: "MoonScale AI Animation Studio inspires me to create new music videos and album covers.",
-  },
-  {
-    name: "Isabelle Dubois",
-    role: "Fashion Designer",
-    avatar: "/professional-woman-fashion-designer.jpg",
-    content:
-      "MoonScale is like having a virtual mood board at my fingertips. I can generate different clothing styles and fabric textures, helping me create unique and cohesive fashion collections.",
-  },
-  {
-    name: "David Lee",
-    role: "Graphic Designer",
+    name: "Liam Parker",
+    role: "Marketing Director",
     avatar: "/professional-man-graphic-designer.jpg",
     content:
-      "I use MoonScale to create mockups and concept art for clients. It saves me tons of time and allows for a wider range of creative exploration.",
+      "From the very first call, I knew I was in good hands. The attention to detail, clean design.",
+    rating: 4.9
   },
   {
-    name: "Noah Miller",
-    role: "Product Developer",
-    avatar: "/professional-man-product-developer.jpg",
+    name: "Ronald Richards",
+    role: "Laravel developer",
+    avatar: "/professional-woman-artist.jpg",
     content:
-      "We use MoonScale to prototype product designs and user interfaces. It allows us to quickly iterate and test different concepts before investing time and resources into physical prototypes.",
+      "Working with Emma Taylor was one of the best decisions we made for our brand. The entire process was smooth, collaborative.",
+    rating: 4.9
   },
   {
-    name: "Peter Jackson",
-    role: "Gamer",
-    avatar: "/professional-man-gamer.jpg",
+    name: "Ronald Richards",
+    role: "Laravel developer",
+    avatar: "/professional-woman-artist.jpg",
     content:
-      "MoonScale takes my gaming experience to the next level. I use it to visualize character designs and environments, making games even more immersive.",
+      "Working with Emma Taylor was one of the best decisions we made for our brand. The entire process was smooth, collaborative.",
+    rating: 4.9
   },
   {
-    name: "Omar Garcia",
-    role: "Web Developer",
-    avatar: "/professional-man-web-developer.jpg",
-    content: "MoonScale is a helpful tool for generating website mockups.",
-  },
-  {
-    name: "Maria Garcia",
-    role: "Architect",
-    avatar: "/professional-woman-architect.png",
-    content: "MoonScale has become an invaluable tool. Simply the best AI animation studio I have used.",
-  },
-  {
-    name: "Aisha Patel",
-    role: "Blogger",
-    avatar: "/professional-woman-blogger.jpg",
+    name: "Ronald Richards",
+    role: "Laravel developer",
+    avatar: "/professional-woman-artist.jpg",
     content:
-      "MoonScale helps me create captivating visuals for my blog posts. It allows me to illustrate complex concepts and make my content more engaging.",
-  },
-  {
-    name: "William Johnson",
-    role: "Hobbyist",
-    avatar: "/professional-man-hobbyist.jpg",
-    content:
-      "MoonScale is a fun and easy way to explore my creativity. I can create fantastical landscapes, portraits, and even abstract art – all with just a few words.",
+      "Working with Emma Taylor was one of the best decisions we made for our brand. The entire process was smooth, collaborative.",
+    rating: 4.9
   },
   {
     name: "Sophia Bennett",
     role: "Editor",
     avatar: "/professional-woman-editor.png",
     content:
-      "MoonScale AI Animation Studio is a great way to generate illustrations for articles, but sometimes the artistic style might not be a perfect fit. It requires some browsing and refinement to find the right image.",
-  },
+      "MoonScale AI Animation Studio is a great way to generate illustrations for articles. I love using it in my workflow.",
+    rating: 4.8
+  }
 ]
 
-export function Testimonials() {
-  return (
-    <section className="py-20 bg-gradient-to-b from-black to-gray-950">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            What Our <span style={{ color: "#7B68EE" }}>Clients Say</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">Trusted by creative professionals worldwide</p>
-        </div>
+const Testimonials = () => {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const isDragging = useRef(false)
+  const startX = useRef(0)
+  const scrollLeft = useRef(0)
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 
-                         border border-gray-800 rounded-xl p-6 
-                         hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10
-                         transition-all duration-300 hover:scale-[1.02]"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src={testimonial.avatar || "/placeholder.svg"}
-                  alt={testimonial.name}
-                  className="w-10 h-10 rounded-full object-cover border-2 border-purple-500/30"
-                />
-                <div>
-                  <h4 className="text-white font-semibold text-sm">{testimonial.name}</h4>
-                  <p className="text-gray-400 text-xs">{testimonial.role}</p>
-                </div>
-              </div>
-              <p className="text-gray-300 text-sm leading-relaxed">{testimonial.content}</p>
-            </div>
-          ))}
-        </div>
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true
+    startX.current = e.pageX - (scrollRef.current?.offsetLeft || 0)
+    scrollLeft.current = scrollRef.current?.scrollLeft || 0
+  }
+
+  const handleMouseUp = () => {
+    isDragging.current = false
+  }
+
+  const handleMouseLeave = () => {
+    isDragging.current = false
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !scrollRef.current) return
+    e.preventDefault()
+    const x = e.pageX - scrollRef.current.offsetLeft
+    const walk = (x - startX.current) * 1.5
+    scrollRef.current.scrollLeft = scrollLeft.current - walk
+  }
+
+  return (
+    <section className="bg-black px-4 py-16">
+      {/* Heading */}
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-bold text-white">
+          What Our <span className="text-purple-500">Clients Say</span>
+        </h2>
       </div>
+
+      {/* Cards Row - Scroll on drag */}
+      <div
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        className="flex gap-6 overflow-x-auto cursor-grab active:cursor-grabbing hide-scrollbar select-none"
+      >
+        {testimonials.map((testimonial, index) => (
+          <div
+            key={index}
+            className="bg-[#212529] min-w-[360px] max-w-[360px] rounded-2xl p-6 relative flex-shrink-0"
+          >
+            {/* Stars */}
+            <div className="text-purple-400 text-sm mb-2">★★★★★</div>
+
+            {/* Rating in top-right */}
+            <div className="absolute top-4 right-4 text-white-400 text-sm">
+              {testimonial.rating}/5
+            </div>
+
+            {/* Content */}
+            <p className="text-[18px] font-semibold text-white leading-snug mb-6">
+              “{testimonial.content}”
+            </p>
+
+            {/* User info */}
+            <div className="flex items-center gap-3 mt-auto">
+              <img
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                className="w-12 h-12 rounded-xl object-cover"
+              />
+              <div>
+                <p className="text-white font-semibold text-sm">{testimonial.name}</p>
+                <p className="text-gray-500 text-sm">{testimonial.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Hide scrollbar styles */}
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </section>
   )
 }
+
+export default Testimonials

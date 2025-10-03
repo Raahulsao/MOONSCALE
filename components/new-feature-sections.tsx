@@ -1,26 +1,26 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Shield, Users, Zap, Play, Pause } from "lucide-react"
+import { Sparkles, Palette, Video, BarChart, Play, Pause, ArrowRight, Check } from "lucide-react"
 
-const ACCENT = "#7B68EE"
+const ACCENT = "#a78bfa" // purple-400
 
 // Premium auto-changing images for each section
-const premiumImages = [
+const designImages = [
   "/3d-product-animation-horizontal-1.jpg",
   "/3d-product-animation-horizontal-2.jpg",
   "/3d-product-animation-horizontal-3.jpg",
   "/3d-product-animation-horizontal-4.jpg",
 ]
 
-const taskImages = [
+const aiMediaImages = [
   "/3d-product-animation-vertical-1.jpg",
   "/3d-product-animation-vertical-2.jpg",
   "/3d-product-animation-vertical-3.jpg",
   "/3d-product-animation-square.jpg",
 ]
 
-const securityImages = [
+const analyticsImages = [
   "/product-animation-horizontal-1.jpg",
   "/product-animation-horizontal-2.jpg",
   "/product-animation-horizontal-3.jpg",
@@ -33,30 +33,34 @@ function PremiumImageCard({ images, className = "" }: { images: string[]; classN
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length)
-    }, 2500)
+    }, 3500)
 
     return () => clearInterval(interval)
   }, [images.length])
 
   return (
-    <div className={`relative overflow-hidden rounded-2xl shadow-2xl ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 z-10" />
-      <img
-        src={images[currentIndex] || "/placeholder.svg"}
-        alt="Premium feature showcase"
-        className="w-full h-full object-cover transition-all duration-700 scale-105 hover:scale-110"
-      />
-      <div className="absolute bottom-4 left-4 z-20">
-        <div className="flex gap-2">
-          {images.map((_, index) => (
-            <div
-              key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentIndex ? "bg-white" : "bg-white/40"
-              }`}
-            />
-          ))}
-        </div>
+    <div className={`group relative overflow-hidden rounded-3xl bg-neutral-900 ${className}`}>
+      {/* Image Container */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <img
+          src={images[currentIndex] || "/placeholder.svg"}
+          alt="Feature showcase"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        {/* Subtle Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
+
+      {/* Progress Indicators */}
+      <div className="absolute bottom-6 left-6 flex gap-2">
+        {images.map((_, index) => (
+          <div
+            key={index}
+            className={`h-1 rounded-full transition-all duration-500 ${
+              index === currentIndex ? "w-8 bg-white" : "w-1 bg-white/30"
+            }`}
+          />
+        ))}
       </div>
     </div>
   )
@@ -78,194 +82,266 @@ function PremiumVideoCard({ className = "" }: { className?: string }) {
   }
 
   return (
-    <div className={`relative overflow-hidden rounded-2xl shadow-2xl group ${className}`}>
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-blue-500/30 z-10" />
-      <video
-        ref={setVideoRef}
-        className="w-full h-full object-cover transition-all duration-700 scale-105 group-hover:scale-110"
-        loop
-        muted
-        playsInline
-        poster="/3d-product-animation-horizontal-1.jpg"
-      >
-        <source src="/demo-video.mp4" type="video/mp4" />
-      </video>
-
-      {/* Play/Pause Button */}
-      <button
-        onClick={togglePlay}
-        className="absolute inset-0 z-20 flex items-center justify-center
-                   bg-black/20 hover:bg-black/30 transition-all duration-300
-                   group-hover:bg-black/40"
-      >
-        <div
-          className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm 
-                        flex items-center justify-center hover:bg-white/30 
-                        transition-all duration-300 hover:scale-110"
+    <div className={`group relative overflow-hidden rounded-3xl bg-neutral-900 ${className}`}>
+      {/* Video Container */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <video
+          ref={setVideoRef}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loop
+          muted
+          playsInline
+          poster="/3d-product-animation-horizontal-1.jpg"
         >
-          {isPlaying ? <Pause className="w-8 h-8 text-white" /> : <Play className="w-8 h-8 text-white ml-1" />}
-        </div>
-      </button>
+          <source src="/demo-video.mp4" type="video/mp4" />
+        </video>
 
-      {/* Premium overlay effects */}
-      <div className="absolute top-4 right-4 z-20">
-        <div
-          className="px-3 py-1 bg-gradient-to-r from-purple-500 to-blue-500 
-                        rounded-full text-white text-xs font-medium"
+        {/* Play/Pause Overlay */}
+        <button
+          onClick={togglePlay}
+          className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/20 transition-colors duration-300"
+          aria-label={isPlaying ? "Pause video" : "Play video"}
         >
-          Premium
+          <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 shadow-xl">
+            {isPlaying ? (
+              <Pause className="w-7 h-7 text-black" />
+            ) : (
+              <Play className="w-7 h-7 text-black ml-0.5" />
+            )}
+          </div>
+        </button>
+      </div>
+
+      {/* Badge */}
+      <div className="absolute top-6 right-6">
+        <span className="px-3 py-1.5 bg-white text-black text-xs font-medium rounded-full shadow-lg">
+          Watch Demo
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function FeatureCard({
+  icon: Icon,
+  badge,
+  title,
+  description,
+  features,
+  images,
+  video = false,
+  reversed = false,
+}: {
+  icon: any
+  badge: string
+  title: string
+  description: string
+  features: string[]
+  images: string[]
+  video?: boolean
+  reversed?: boolean
+}) {
+  return (
+    <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${reversed ? "lg:grid-flow-dense" : ""}`}>
+      {/* Content Side */}
+      <div className={`space-y-8 ${reversed ? "lg:col-start-2" : ""}`}>
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-full border border-neutral-800">
+          <Icon className="w-4 h-4 text-purple-400" />
+          <span className="text-sm font-medium text-neutral-300">{badge}</span>
         </div>
+
+        {/* Title */}
+        <h3 className="text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">{title}</h3>
+
+        {/* Description */}
+        <p className="text-lg text-neutral-400 leading-relaxed">{description}</p>
+
+        {/* Feature List */}
+        <div className="space-y-4 pt-4">
+          {features.map((feature, index) => (
+            <div key={index} className="flex items-start gap-3 group/item">
+              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-purple-400/10 flex items-center justify-center mt-0.5">
+                <Check className="w-3 h-3 text-purple-400" />
+              </div>
+              <span className="text-neutral-300 group-hover/item:text-white transition-colors duration-200">
+                {feature}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Link */}
+        <button className="group/btn inline-flex items-center gap-2 text-white font-medium hover:gap-3 transition-all duration-300">
+          <span>Explore solutions</span>
+          <ArrowRight className="w-4 h-4 text-purple-400" />
+        </button>
+      </div>
+
+      {/* Media Side */}
+      <div className={reversed ? "lg:col-start-1 lg:row-start-1" : ""}>
+        {video ? (
+          <PremiumVideoCard className="w-full" />
+        ) : (
+          <PremiumImageCard images={images} className="w-full" />
+        )}
       </div>
     </div>
   )
 }
 
 export function NewFeatureSections() {
+  const features = [
+    {
+      icon: Palette,
+      badge: "Design & Development",
+      title: "AI-powered website & UI/UX design",
+      description:
+        "We craft stunning websites and intuitive user experiences for brands of all sizes. From startups to enterprise companies, our AI-enhanced design process delivers pixel-perfect interfaces that convert visitors into customers and elevate your digital presence.",
+      features: [
+        "Custom website design & development",
+        "Modern UI/UX for web and mobile apps",
+        "Responsive design optimized for all devices",
+        "Brand-aligned design systems and guidelines",
+      ],
+      images: designImages,
+      video: false,
+      reversed: false,
+    },
+    {
+      icon: Video,
+      badge: "AI Media Generation",
+      title: "AI video & photo generation at scale",
+      description:
+        "Transform your visual content strategy with cutting-edge AI technology. Generate professional-quality product photos, marketing videos, and creative assets in minutes—not weeks. Perfect for e-commerce brands, marketing agencies, and content creators who need high-volume, high-quality visuals.",
+      features: [
+        "AI-generated product photography and lifestyle images",
+        "Automated video creation for social media and ads",
+        "Custom AI models trained on your brand style",
+        "Bulk generation for catalogs and campaigns",
+      ],
+      images: aiMediaImages,
+      video: true,
+      reversed: true,
+    },
+    {
+      icon: BarChart,
+      badge: "AI Research & Analytics",
+      title: "Data-driven insights & intelligence",
+      description:
+        "Harness the power of AI to unlock actionable insights from your data. Our advanced analytics and research capabilities help you understand market trends, customer behavior, and competitive landscapes—empowering smarter business decisions backed by real intelligence.",
+      features: [
+        "AI-powered market research and competitor analysis",
+        "Customer behavior analysis and segmentation",
+        "Predictive analytics for business forecasting",
+        "Custom AI solutions for data processing",
+      ],
+      images: analyticsImages,
+      video: false,
+      reversed: false,
+    },
+  ]
+
   return (
-    <section className="py-24 bg-gradient-to-b from-black via-gray-950 to-black text-white">
-      <div className="container mx-auto px-4">
+    <section className="relative py-24 lg:py-32 bg-black overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] opacity-30" />
+
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            What makes us the <span style={{ color: ACCENT }}>best studio</span> for you.
+        <div className="max-w-3xl mx-auto text-center mb-20 lg:mb-28">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-full border border-neutral-800 mb-6">
+            <Sparkles className="w-4 h-4 text-purple-400" />
+            <span className="text-sm font-medium text-neutral-300">AI-Powered Solutions</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
+            Why leading brands choose our <span className="text-purple-400">AI agency</span>
           </h2>
-          <p className="text-gray-400 text-xl max-w-3xl mx-auto">
-            Experience premium features designed to elevate your creative workflow
+          <p className="text-lg lg:text-xl text-neutral-400 leading-relaxed">
+            From startups to Fortune 500 companies, we deliver cutting-edge AI solutions that transform how businesses
+            create, analyze, and scale their digital presence.
           </p>
         </div>
 
-        {/* Real-Time Creative Collaboration */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 
-                              rounded-full border border-purple-500/30"
-              >
-                <Zap className="w-4 h-4" style={{ color: ACCENT }} />
-                {/*<span className="text-sm font-medium" style={{ color: ACCENT }}>
-                  Real-Time Collaboration
-                </span>*/}
-              </div>
-              <h3 className="text-4xl md:text-5xl font-bold text-white leading-tight">Creative Sync in Real-Time</h3>
-            </div>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              Experience seamless collaboration with instant creative feedback, live editing sessions, and synchronized
-              project updates that keep your entire team aligned and productive.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">Instant creative feedback loops</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">Live collaborative editing sessions</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">Synchronized project timelines</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative">
-            <PremiumImageCard images={premiumImages} className="h-96 lg:h-[500px]" />
-            <div
-              className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-purple-500 to-blue-500 
-                            rounded-full blur-3xl opacity-30"
-            />
-          </div>
+        {/* Feature Cards */}
+        <div className="space-y-32 lg:space-y-40">
+          {features.map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
+          ))}
         </div>
 
-        {/* Advanced Project Management with Video */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
-          <div className="order-2 lg:order-1 relative">
-            <PremiumVideoCard className="h-96 lg:h-[500px]" />
-            <div
-              className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-500 
-                            rounded-full blur-3xl opacity-30"
-            />
-          </div>
+        {/* Additional Services Banner */}
+        <div className="mt-32 lg:mt-40">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-neutral-800">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                  More AI solutions for your business
+                </h3>
+                <p className="text-neutral-400 max-w-2xl mx-auto">
+                  We offer a comprehensive suite of AI-powered services tailored to your unique needs
+                </p>
+              </div>
 
-          <div className="order-1 lg:order-2 space-y-8">
-            <div className="space-y-4">
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 
-                              rounded-full border border-blue-500/30"
-              >
-                <Users className="w-4 h-4" style={{ color: ACCENT }} />
-                <span className="text-sm font-medium" style={{ color: ACCENT }}>
-                  Advanced Management
-                </span>
-              </div>
-              <h3 className="text-4xl md:text-5xl font-bold text-white leading-tight">Intelligent Project Flow</h3>
-            </div>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              Streamline complex creative projects with AI-powered task management, automated workflows, and intelligent
-              resource allocation that adapts to your team's unique creative process.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">AI-powered task prioritization</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">Automated creative workflows</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">Smart resource optimization</span>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  {
+                    title: "AI Automation",
+                    description: "Streamline workflows with intelligent automation",
+                  },
+                  {
+                    title: "Content Writing",
+                    description: "AI-assisted copywriting and content creation",
+                  },
+                  {
+                    title: "Chatbot Development",
+                    description: "Custom AI chatbots for customer engagement",
+                  },
+                  {
+                    title: "Consulting",
+                    description: "AI strategy and implementation guidance",
+                  },
+                ].map((service, index) => (
+                  <div
+                    key={index}
+                    className="bg-black rounded-2xl p-6 border border-neutral-800 hover:border-neutral-700 transition-colors duration-200"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-purple-400/10 flex items-center justify-center mb-4">
+                      <Sparkles className="w-5 h-5 text-purple-400" />
+                    </div>
+                    <h4 className="text-white font-semibold mb-2">{service.title}</h4>
+                    <p className="text-sm text-neutral-400">{service.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Enterprise Security */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 
-                              rounded-full border border-green-500/30"
-              >
-                <Shield className="w-4 h-4" style={{ color: ACCENT }} />
-                <span className="text-sm font-medium" style={{ color: ACCENT }}>
-                  Enterprise Security
-                </span>
-              </div>
-              <h3 className="text-4xl md:text-5xl font-bold text-white leading-tight">Bank-Level Protection</h3>
-            </div>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              Protect your creative assets with military-grade encryption, advanced access controls, and comprehensive
-              audit trails that meet the highest industry security standards.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">End-to-end encryption for all assets</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">Advanced role-based access control</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: ACCENT }} />
-                <span className="text-gray-300">Comprehensive security audit trails</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative">
-            <PremiumImageCard images={securityImages} className="h-96 lg:h-[500px]" />
-            <div
-              className="absolute -top-6 -right-6 w-32 h-32 bg-gradient-to-br from-green-500 to-blue-500 
-                            rounded-full blur-3xl opacity-30"
-            />
-          </div>
-        </div>
+        {/* Bottom CTA Section */}
+        <div className="mt-32 lg:mt-40">
+  {/* Main Card Container with Border Radius */}
+  <div className="max-w-4xl mx-auto bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-purple-400">
+    <div className="grid md:grid-cols-2 gap-8 items-center">
+      <div className="space-y-4">
+        <h3 className="text-2xl lg:text-3xl font-bold text-white">Ready to transform your business?</h3>
+        <p className="text-neutral-400">
+          Join hundreds of companies leveraging AI to scale faster, create better, and stay ahead of the
+          competition.
+        </p>
       </div>
-    </section>
+      <div className="flex flex-col sm:flex-row gap-4 md:justify-end">
+        <button className="px-6 py-3 bg-white text-black font-medium rounded-xl hover:bg-neutral-100 transition-colors duration-200 hover:shadow-lg">
+          Get started
+        </button>
+        <button className="px-6 py-3 bg-transparent text-white font-medium rounded-xl border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-800 transition-all duration-200">
+          View case studies
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
   )
 }

@@ -451,12 +451,12 @@ export default function BlogPage() {
                 onMouseEnter={() => setHoveredFeature(card.id)}
                 onMouseLeave={() => setHoveredFeature(null)}
               >
-                <div className="text-gray-400 group-hover:text-blue-400 transition-all duration-200 flex-shrink-0 group-hover:scale-110">
+                <div className="text-gray-400 group-hover:text-purple-400 transition-all duration-200 flex-shrink-0 group-hover:scale-110">
                   {card.icon}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-semibold text-white text-base group-hover:text-blue-100 transition-colors duration-200">
+                    <h3 className="font-semibold text-white text-base group-hover:text-purple-400 transition-colors duration-200">
                       {card.title}
                     </h3>
                     {card.legacy && (

@@ -109,8 +109,8 @@ export function Footer() {
                           transition-colors text-sm"
               />
               <button
-                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-blue-500 
-                          text-white rounded-lg hover:from-purple-600 hover:to-blue-600 
+                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-purple-400 
+                          text-white rounded-lg hover:from-purple-600 hover:to-purple-400 
                           transition-all duration-200 text-sm font-medium"
               >
                 Subscribe

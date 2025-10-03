@@ -5,13 +5,14 @@ import { NewFeatureSections } from "@/components/new-feature-sections"
 import Services from "@/components/service"
 import { LogoMarquee } from "@/components/logo-marquee"
 import { Pricing } from "@/components/pricing"
-import { Testimonials } from "@/components/testimonials"
+import Testimonials from "@/components/testimonials"
 import { Footer } from "@/components/footer"
 import Script from "next/script"
 import ScrollReactiveCards from "@/components/scroll-reactive-cards"
 import { ProjectPageCard } from "@/components/project-page-card"
 import { NewHero } from "@/components/new-hero"
 import LazyVideo from "@/components/lazy-video"
+// Removed Gallery import since the component was deleted
 
 // ✅ Force static generation for low TTFB
 export const dynamic = "force-static"
@@ -112,6 +113,7 @@ export default function Page() {
         <ProjectPageCard />
         <Pricing />
         <Testimonials />
+        {/* Removed Gallery component since it was deleted */}
         <Footer />
       </main>
 
