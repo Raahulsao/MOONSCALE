@@ -1,5 +1,5 @@
 import { SiteHeader } from "@/components/site-header"
-import { AppverseFooter } from "@/components/appverse-footer"
+import  Footer  from "@/components/footer"
 
 export const metadata = {
   title: "Privacy Policy | Moon Scale",
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
             </div>
           </section>
         </div>
-        <AppverseFooter />
+        <Footer />
       </main>
     </>
   )

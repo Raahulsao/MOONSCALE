@@ -14,19 +14,19 @@ const ScrollUnstackCards = () => {
   const cards = [
     {
       id: 1,
-      image: "/images/art1.jpeg",
+      image: "/images/art41.jpeg",
     },
     {
       id: 2,
-      image: "/images/art3.jpeg",
+      image: "/images/art42.jpeg",
     },
     {
       id: 3,    
-      image: "/images/art22.jpeg",
+      image: "/images/art43.jpeg",
     },
     {
       id: 4,
-      image: "/images/art16.jpeg",
+      image: "/images/art44.jpeg",
     },
   ]
 

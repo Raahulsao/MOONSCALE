@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { Terms } from "@/components/terms"
-import { AppverseFooter } from "@/components/appverse-footer"
+import  Footer  from "@/components/footer"
 
 export const metadata = {
   title: "Terms & Conditions | Moon Scale",
@@ -15,7 +15,7 @@ export default function TermsPage() {
         <div className="pt-20">
           <Terms />
         </div>
-        <AppverseFooter />
+        <Footer />
       </main>
     </>
   )

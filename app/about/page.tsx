@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/site-header"
 import About from "@/components/about"
-import { AppverseFooter } from "@/components/appverse-footer"
+import  Footer  from "@/components/footer"
 
 export const metadata = {
   title: "About Us | Moon Scale",
@@ -15,7 +15,7 @@ export default function AboutPage() {
         <div className="pt-20">
           <About />
         </div>
-        <AppverseFooter />
+        <Footer />
       </main>
     </>
   )

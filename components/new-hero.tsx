@@ -7,9 +7,9 @@ import clsx from 'clsx'
 export function NewHero() {
   const imageOptions = [
     '/images/heroart.png',
-    '/images/art33.jpg',
-    '/images/art29.jpeg',
-    '/images/art34.jpg',
+    '/images/art40.jpg',
+    '/images/art38.jpeg',
+    '/images/art38.jpg',
     '/images/art26.jpeg',
     '/images/art23.jpeg',
     '/images/art24.jpeg',

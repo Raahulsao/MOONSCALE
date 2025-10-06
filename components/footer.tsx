@@ -1,148 +1,182 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import Image from "next/image"
-import { Mail, Phone, MapPin, Twitter, Instagram, Linkedin, Github } from "lucide-react"
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import {
+  Twitter,
+  Instagram,
+  Linkedin,
+  Facebook,
+} from 'lucide-react'
 
-export function Footer() {
-  const footerLinks = {
-    Services: [
-      { name: "3D Animation", href: "#services" },
-      { name: "Motion Graphics", href: "#services" },
-      { name: "Visual Effects", href: "#services" },
-      { name: "Product Visualization", href: "#services" },
-    ],
-    Company: [
-      { name: "About Us", href: "/about" },
-      { name: "Our Team", href: "/about" },
-      { name: "Careers", href: "#careers" },
-      { name: "Blog", href: "/blog" },
-    ],
-    Support: [
-      { name: "FAQ", href: "/faq" },
-      { name: "Contact", href: "#contact" },
-      { name: "Help Center", href: "#help" },
-      { name: "Documentation", href: "#docs" },
-    ],
-    Legal: [
-      { name: "Privacy Policy", href: "/privacy" },
-      { name: "Terms of Service", href: "/terms" },
-      { name: "Cookie Policy", href: "#cookies" },
-      { name: "Refund Policy", href: "/revisions" },
+export default function Footer() {
+  const ref = useRef(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.2 }
+    )
+
+    if (ref.current) observer.observe(ref.current)
+
+    return () => observer.disconnect()
+  }, [])
+
+  const linkItems = {
+    Company: ['Home', 'About', 'Blog', 'Blog Details'],
+    'Quick Links': [
+      'Create AI',
+      'Contact',
+      'Privacy Policy',
+      'Terms And Conditions',
     ],
   }
 
-  const socialLinks = [
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Github, href: "#", label: "GitHub" },
-  ]
-
   return (
-    <footer className="bg-gradient-to-b from-gray-950 to-black border-t border-gray-800">
-      <div className="container mx-auto px-4 py-16">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/icons/logo.png" alt="Moon Scale logo" width={32} height={32} className="w-8 h-8" />
-              <span className="font-bold text-xl">
-                <span style={{ color: "#7B68EE" }}>MOON</span>
-                <span className="text-white"> SCALE</span>
-              </span>
-            </Link>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-              Transforming ideas into stunning visual experiences through cutting-edge 3D animation and AI-powered
-              creative solutions.
-            </p>
-
-            {/* Contact Info */}
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-gray-400 text-sm">
-                <Mail className="w-4 h-4" />
-                <span>moonscale@gmail.com</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400 text-sm">
-                <Phone className="w-4 h-4" />
-                <span>+91 8839720548</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400 text-sm">
-                <MapPin className="w-4 h-4" />
-                <span>Gurgaon Haryana, INDIA</span>
-              </div>
-            </div>
+    <footer
+  ref={ref}
+  className={`bg-black text-white px-6 md:px-12 pt-16 pb-2 mb-4 transition-all duration-1000 ease-out
+    border border-purple-400 rounded-xl shadow-inner
+    ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}
+  `}
+>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        {/* Branding Section */}
+        <div className={`col-span-1 space-y-6`}>
+          <div className="flex items-center space-x-2">
+            <Image
+              src="/icons/logo.png"
+              alt="MOON SCALE logo"
+              width={40}
+              height={40}
+            />
+            <span className="text-2xl font-bold">
+              <span className="text-purple-400">MOON</span>{' '}
+              <span>SCALE</span>
+            </span>
           </div>
-
-          {/* Footer Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category} className="space-y-4">
-              <h4 className="text-white font-semibold text-sm uppercase tracking-wider">{category}</h4>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-400 text-sm hover:text-purple-400 transition-colors duration-200"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        {/* Newsletter Section */}
-        {/*<div className="border-t border-gray-800 pt-8 mb-8">
-          <div className="max-w-md">
-            <h4 className="text-white font-semibold mb-2">Stay Updated</h4>
-            <p className="text-gray-400 text-sm mb-4">Get the latest updates on our services and industry insights.</p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg 
-                          text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 
-                          transition-colors text-sm"
-              />
-              <button
-                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-purple-400 
-                          text-white rounded-lg hover:from-purple-600 hover:to-purple-400 
-                          transition-all duration-200 text-sm font-medium"
-              >
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>*/}
-
-        {/* Bottom Section */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} <span style={{ color: "#7B68EE" }}>Moon</span>{" "}
-            <span className="text-white">Scale</span>. All rights reserved.
+          <p className="text-gray-400 text-base max-w-sm">
+            Powered by MOON Scale. Built for businesses. Driven by Professionals.
           </p>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-4">
-            {socialLinks.map((social) => (
+          {/* Social Icons */}
+          <div className="flex gap-3 pt-4">
+            {[Twitter, Linkedin, Instagram, Facebook].map((Icon, index) => (
               <Link
-                key={social.label}
-                href={social.href}
-                className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center
-                          text-gray-400 hover:text-white hover:bg-purple-500 
-                          transition-all duration-200"
-                aria-label={social.label}
+                key={index}
+                href="#"
+                className="w-10 h-10 rounded-full bg-neutral-900 flex items-center justify-center text-white hover:text-purple-400 transition-all duration-300"
               >
-                <social.icon className="w-4 h-4" />
+                <Icon size={18} />
               </Link>
             ))}
           </div>
         </div>
+
+        {/* Dynamic Link Sections */}
+        {Object.entries(linkItems).map(([title, links], sectionIndex) => (
+          <div
+            key={title}
+            className={`space-y-4 opacity-0 transform translate-y-10 ${
+              isVisible
+                ? 'animate-fade-in-up animation-delay-' +
+                  sectionIndex * 200
+                : ''
+            }`}
+          >
+            <h4 className="text-lg font-semibold mb-2">{title}</h4>
+            <ul className="space-y-3">
+              {links.map((text, idx) => (
+                <li
+                  key={text}
+                  className={`text-base text-gray-400 transform transition duration-500 ease-in-out group`}
+                >
+                  <Link
+                    href="#"
+                    className="relative inline-block overflow-hidden"
+                  >
+                    <span
+                      className="block transition-transform duration-300 group-hover:-translate-y-1 group-hover:text-purple-400"
+                    >
+                      {text}
+                    </span>
+                    <span
+                      className="absolute bottom-0 left-0 h-0.5 w-full bg-purple-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+        {/* Newsletter */}
+        <div
+          className={`space-y-4 opacity-0 translate-y-10 ${
+            isVisible ? 'animate-fade-in-up animation-delay-600' : ''
+          }`}
+        >
+          <h4 className="text-lg font-semibold">Subscribe For Our Newsletter</h4>
+          <form className="flex items-center bg-neutral-900 rounded-full px-4 py-2 w-full max-w-xs">
+            <input
+              type="email"
+              placeholder="Email"
+              className="bg-transparent text-white text-sm w-full outline-none placeholder-gray-500"
+            />
+            <button
+              type="submit"
+              className="text-white hover:text-purple-400 transition"
+            >
+              ➜
+            </button>
+          </form>
+        </div>
       </div>
+
+      {/* Footer Bottom */}
+      <div className="mt-16 border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between text-sm text-gray-500">
+        <p>© MOON SCALE 2025, All Rights Reserved</p>
+        
+      </div>
+
+      {/* Advanced Animation Styles */}
+      <style jsx>{`
+        @keyframes fade-in-up {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.6s forwards;
+        }
+
+        .animation-delay-0 {
+          animation-delay: 0ms;
+        }
+        .animation-delay-200 {
+          animation-delay: 200ms;
+        }
+        .animation-delay-400 {
+          animation-delay: 400ms;
+        }
+        .animation-delay-600 {
+          animation-delay: 600ms;
+        }
+      `}</style>
     </footer>
   )
 }

@@ -27,6 +27,125 @@ const analyticsImages = [
   "/product-animation-vertical-1.jpg",
 ]
 
+// Logo data for marquee
+const techLogos = [
+  { name: "React", image: "/icons/react.png" },
+  { name: "javascript", image: "/icons/JavaScript.png" },
+  { name: "Node js", image: "/icons/Node.js.png" },
+  { name: "Tailwind CSS", image: "/icons/tailwind css.png" },
+  { name: "Figma", image: "/icons/figma-color.png" },
+  { name: "Adobe", image: "/icons/Adobe XD.png" },
+  { name: "Angular", image: "/icons/Angular.png" },
+  { name: "Bootstrap", image: "/icons/Bootstrap.png" },
+  { name: "Django", image: "/icons/Django.png" },
+  { name: "Docker", image: "/icons/Docker.png" },
+  { name: "jquery", image: "/icons/jQuery.png" },
+  { name: "FastAPI", image: "/icons/FastAPI.png" },
+  { name: "css", image: "/icons/CSS3.png" },
+  { name: "Firebase", image: "/icons/Firebase.png" },
+  { name: "HTML", image: "/icons/HTML5.png" },
+  { name: "Framer", image: "/icons/Heroku.png" },
+]
+
+const aiLogos = [
+  { name: "OpenAI", image: "/logos/openai.svg" },
+  { name: "Midjourney", image: "/logos/midjourney.svg" },
+  { name: "Stable Diffusion", image: "/logos/stablediffusion.svg" },
+  { name: "RunwayML", image: "/logos/runway.svg" },
+  { name: "DALL-E", image: "/logos/dalle.svg" },
+  { name: "Leonardo AI", image: "/logos/leonardo.svg" },
+  { name: "Pika", image: "/logos/pika.svg" },
+  { name: "Synthesia", image: "/logos/synthesia.svg" },
+  { name: "OpenAI", image: "/logos/openai.svg" },
+  { name: "Midjourney", image: "/logos/midjourney.svg" },
+  { name: "Stable Diffusion", image: "/logos/stablediffusion.svg" },
+  { name: "RunwayML", image: "/logos/runway.svg" },
+  { name: "DALL-E", image: "/logos/dalle.svg" },
+  { name: "Leonardo AI", image: "/logos/leonardo.svg" },
+  { name: "Pika", image: "/logos/pika.svg" },
+  { name: "Synthesia", image: "/logos/synthesia.svg" },
+]
+
+const analyticsLogos = [
+  { name: "Python", image: "/logos/python.svg" },
+  { name: "TensorFlow", image: "/logos/tensorflow.svg" },
+  { name: "PyTorch", image: "/logos/pytorch.svg" },
+  { name: "Tableau", image: "/logos/tableau.svg" },
+  { name: "PowerBI", image: "/logos/powerbi.svg" },
+  { name: "Google Analytics", image: "/logos/analytics.svg" },
+  { name: "Pandas", image: "/logos/pandas.svg" },
+  { name: "scikit-learn", image: "/logos/sklearn.svg" },
+  { name: "Python", image: "/logos/python.svg" },
+  { name: "TensorFlow", image: "/logos/tensorflow.svg" },
+  { name: "PyTorch", image: "/logos/pytorch.svg" },
+  { name: "Tableau", image: "/logos/tableau.svg" },
+  { name: "PowerBI", image: "/logos/powerbi.svg" },
+  { name: "Google Analytics", image: "/logos/analytics.svg" },
+  { name: "Pandas", image: "/logos/pandas.svg" },
+  { name: "scikit-learn", image: "/logos/sklearn.svg" },
+]
+function LogoMarquee({ logos, direction = "left" }: { logos: typeof techLogos; direction?: "left" | "right" }) {
+  // Double the logos for seamless loop
+  const duplicatedLogos = [...logos, ...logos]
+
+  return (
+    <div className="relative w-full overflow-hidden py-8">
+      {/* Gradient Overlays */}
+      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
+
+      {/* Scrolling Container */}
+      <div
+        className={`flex gap-8 ${
+          direction === "left" ? "animate-scroll-left" : "animate-scroll-right"
+        }`}
+        style={{
+          width: "max-content",
+        }}
+      >
+        {duplicatedLogos.map((logo, index) => (
+          <div
+            key={`${logo.name}-${index}`}
+            className="flex-shrink-0 w-20 h-12 flex items-center justify-center grayscale-0 hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300"
+          >
+            <img
+              src={logo.image || "/placeholder.svg"}
+              alt={logo.name}
+              className="max-w-full max-h-full object-contain"
+              onError={(e) => {
+                // Fallback to text if image fails to load
+                e.currentTarget.style.display = "none"
+                e.currentTarget.parentElement!.innerHTML = `<span class="text-neutral-400 font-semibold text-sm">${logo.name}</span>`
+              }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function DoubleMarquee({ logos }: { logos: typeof techLogos }) {
+  return (
+    <div className="mt-12">
+      {/* Heading */}
+      <div className="text-center mb-8">
+        <h4 className="text-xl lg:text-2xl font-bold text-white mb-2">
+          Tech stcks & Tools
+        </h4>        
+      </div>
+      
+      {/* Marquee rows */}
+      <div className="space-y-4">
+        {/* First row - scrolls left */}
+        <LogoMarquee logos={logos} direction="left" />
+        {/* Second row - scrolls right */}
+        <LogoMarquee logos={logos} direction="right" />
+      </div>
+    </div>
+  )
+}
+
 function PremiumImageCard({ images, className = "" }: { images: string[]; className?: string }) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -129,6 +248,7 @@ function FeatureCard({
   description,
   features,
   images,
+  logos,
   video = false,
   reversed = false,
 }: {
@@ -138,54 +258,60 @@ function FeatureCard({
   description: string
   features: string[]
   images: string[]
+  logos: typeof techLogos
   video?: boolean
   reversed?: boolean
 }) {
   return (
-    <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${reversed ? "lg:grid-flow-dense" : ""}`}>
-      {/* Content Side */}
-      <div className={`space-y-8 ${reversed ? "lg:col-start-2" : ""}`}>
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-full border border-neutral-800">
-          <Icon className="w-4 h-4 text-purple-400" />
-          <span className="text-sm font-medium text-neutral-300">{badge}</span>
-        </div>
+    <div className="space-y-8">
+      <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${reversed ? "lg:grid-flow-dense" : ""}`}>
+        {/* Content Side */}
+        <div className={`space-y-8 ${reversed ? "lg:col-start-2" : ""}`}>
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-full border border-neutral-800">
+            <Icon className="w-4 h-4 text-purple-400" />
+            <span className="text-sm font-medium text-neutral-300">{badge}</span>
+          </div>
 
-        {/* Title */}
-        <h3 className="text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">{title}</h3>
+          {/* Title */}
+          <h3 className="text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight">{title}</h3>
 
-        {/* Description */}
-        <p className="text-lg text-neutral-400 leading-relaxed">{description}</p>
+          {/* Description */}
+          <p className="text-lg text-neutral-400 leading-relaxed">{description}</p>
 
-        {/* Feature List */}
-        <div className="space-y-4 pt-4">
-          {features.map((feature, index) => (
-            <div key={index} className="flex items-start gap-3 group/item">
-              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-purple-400/10 flex items-center justify-center mt-0.5">
-                <Check className="w-3 h-3 text-purple-400" />
+          {/* Feature List */}
+          <div className="space-y-4 pt-4">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-start gap-3 group/item">
+                <div className="flex-shrink-0 w-5 h-5 rounded-full bg-purple-400/10 flex items-center justify-center mt-0.5">
+                  <Check className="w-3 h-3 text-purple-400" />
+                </div>
+                <span className="text-neutral-300 group-hover/item:text-white transition-colors duration-200">
+                  {feature}
+                </span>
               </div>
-              <span className="text-neutral-300 group-hover/item:text-white transition-colors duration-200">
-                {feature}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* CTA Link */}
+          <button className="group/btn inline-flex items-center gap-2 text-white font-medium hover:gap-3 transition-all duration-300">
+            <span>Explore solutions</span>
+            <ArrowRight className="w-4 h-4 text-purple-400" />
+          </button>
         </div>
 
-        {/* CTA Link */}
-        <button className="group/btn inline-flex items-center gap-2 text-white font-medium hover:gap-3 transition-all duration-300">
-          <span>Explore solutions</span>
-          <ArrowRight className="w-4 h-4 text-purple-400" />
-        </button>
+        {/* Media Side */}
+        <div className={reversed ? "lg:col-start-1 lg:row-start-1" : ""}>
+          {video ? (
+            <PremiumVideoCard className="w-full" />
+          ) : (
+            <PremiumImageCard images={images} className="w-full" />
+          )}
+        </div>
       </div>
 
-      {/* Media Side */}
-      <div className={reversed ? "lg:col-start-1 lg:row-start-1" : ""}>
-        {video ? (
-          <PremiumVideoCard className="w-full" />
-        ) : (
-          <PremiumImageCard images={images} className="w-full" />
-        )}
-      </div>
+      {/* Logo Marquee - Below explore section - NO BACKGROUND CARD */}
+      <DoubleMarquee logos={logos} />
     </div>
   )
 }
@@ -205,6 +331,7 @@ export function NewFeatureSections() {
         "Brand-aligned design systems and guidelines",
       ],
       images: designImages,
+      logos: techLogos,
       video: false,
       reversed: false,
     },
@@ -221,6 +348,7 @@ export function NewFeatureSections() {
         "Bulk generation for catalogs and campaigns",
       ],
       images: aiMediaImages,
+      logos: aiLogos,
       video: true,
       reversed: true,
     },
@@ -237,111 +365,148 @@ export function NewFeatureSections() {
         "Custom AI solutions for data processing",
       ],
       images: analyticsImages,
+      logos: analyticsLogos,
       video: false,
       reversed: false,
     },
   ]
 
   return (
-    <section className="relative py-24 lg:py-32 bg-black overflow-hidden">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] opacity-30" />
+    <>
+      <style jsx global>{`
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
 
-      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-20 lg:mb-28">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-full border border-neutral-800 mb-6">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm font-medium text-neutral-300">AI-Powered Solutions</span>
+        @keyframes scroll-right {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        .animate-scroll-left {
+          animation: scroll-left 50s linear infinite;
+        }
+
+        .animate-scroll-right {
+          animation: scroll-right 50s linear infinite;
+        }
+
+        
+      `}</style>
+
+      <section className="relative py-24 lg:py-32 bg-black overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] opacity-30" />
+
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="max-w-3xl mx-auto text-center mb-20 lg:mb-28">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 rounded-full border border-neutral-800 mb-6">
+              <Sparkles className="w-4 h-4 text-purple-400" />
+              <span className="text-sm font-medium text-neutral-300">AI-Powered Solutions</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
+              Why leading brands choose our <span className="text-purple-400">AI agency</span>
+            </h2>
+            <p className="text-lg lg:text-xl text-neutral-400 leading-relaxed">
+              From startups to Fortune 500 companies, we deliver cutting-edge AI solutions that transform how businesses
+              create, analyze, and scale their digital presence.
+            </p>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">
-            Why leading brands choose our <span className="text-purple-400">AI agency</span>
-          </h2>
-          <p className="text-lg lg:text-xl text-neutral-400 leading-relaxed">
-            From startups to Fortune 500 companies, we deliver cutting-edge AI solutions that transform how businesses
-            create, analyze, and scale their digital presence.
-          </p>
-        </div>
 
-        {/* Feature Cards */}
-        <div className="space-y-32 lg:space-y-40">
-          {features.map((feature, index) => (
-            <FeatureCard key={index} {...feature} />
-          ))}
-        </div>
+          {/* Feature Cards */}
+          <div className="space-y-32 lg:space-y-40">
+            {features.map((feature, index) => (
+              <FeatureCard key={index} {...feature} />
+            ))}
+          </div>
 
-        {/* Additional Services Banner */}
-        <div className="mt-32 lg:mt-40">
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-neutral-800">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                  More AI solutions for your business
-                </h3>
-                <p className="text-neutral-400 max-w-2xl mx-auto">
-                  We offer a comprehensive suite of AI-powered services tailored to your unique needs
-                </p>
-              </div>
+          {/* Additional Services Banner */}
+          <div className="mt-32 lg:mt-40">
+            <div className="max-w-5xl mx-auto">
+              <div className="bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-neutral-800">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                    More AI solutions for your business
+                  </h3>
+                  <p className="text-neutral-400 max-w-2xl mx-auto">
+                    We offer a comprehensive suite of AI-powered services tailored to your unique needs
+                  </p>
+                </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  {
-                    title: "AI Automation",
-                    description: "Streamline workflows with intelligent automation",
-                  },
-                  {
-                    title: "Content Writing",
-                    description: "AI-assisted copywriting and content creation",
-                  },
-                  {
-                    title: "Chatbot Development",
-                    description: "Custom AI chatbots for customer engagement",
-                  },
-                  {
-                    title: "Consulting",
-                    description: "AI strategy and implementation guidance",
-                  },
-                ].map((service, index) => (
-                  <div
-                    key={index}
-                    className="bg-black rounded-2xl p-6 border border-neutral-800 hover:border-neutral-700 transition-colors duration-200"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-purple-400/10 flex items-center justify-center mb-4">
-                      <Sparkles className="w-5 h-5 text-purple-400" />
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {[
+                    {
+                      title: "Emerging AI Services",
+                      description: "Streamline workflows with intelligent automation",
+                    },
+                    {
+                      title: "Content Writing",
+                      description: "AI-assisted copywriting and content creation",
+                    },
+                    {
+                      title: "Chatbot Development",
+                      description: "Custom AI chatbots for customer engagement",
+                    },
+                    {
+                      title: "Consulting",
+                      description: "AI strategy and implementation guidance",
+                    },
+                  ].map((service, index) => (
+                    <div
+                      key={index}
+                      className="bg-black rounded-2xl p-6 border border-neutral-800 hover:border-neutral-700 transition-colors duration-200"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-purple-400/10 flex items-center justify-center mb-4">
+                        <Sparkles className="w-5 h-5 text-purple-400" />
+                      </div>
+                      <h4 className="text-white font-semibold mb-2">{service.title}</h4>
+                      <p className="text-sm text-neutral-400">{service.description}</p>
                     </div>
-                    <h4 className="text-white font-semibold mb-2">{service.title}</h4>
-                    <p className="text-sm text-neutral-400">{service.description}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom CTA Section */}
+          <div className="mt-32 lg:mt-40">
+            {/* Main Card Container with Border Radius */}
+            <div className="max-w-4xl mx-auto bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-purple-400">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-4">
+                  <h3 className="text-2xl lg:text-3xl font-bold text-white">Ready to transform your business?</h3>
+                  <p className="text-neutral-400">
+                    Join hundreds of companies leveraging AI to scale faster, create better, and stay ahead of the
+                    competition.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 md:justify-end">
+                  <a href="https://wa.me/+918839720548" target="_blank" rel="noopener noreferrer">
+                    <button className="cursor-pointer px-6 py-3 bg-white text-black font-medium rounded-xl hover:bg-neutral-100 transition-colors duration-200 hover:shadow-lg">
+                      Get started
+                    </button>
+                  </a>
+                  <a href="/blog" rel="noopener noreferrer">
+                    <button className="cursor-pointer px-6 py-3 bg-transparent text-white font-medium rounded-xl border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-800 transition-all duration-200">
+                      View case studies
+                    </button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Bottom CTA Section */}
-        <div className="mt-32 lg:mt-40">
-  {/* Main Card Container with Border Radius */}
-  <div className="max-w-4xl mx-auto bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-purple-400">
-    <div className="grid md:grid-cols-2 gap-8 items-center">
-      <div className="space-y-4">
-        <h3 className="text-2xl lg:text-3xl font-bold text-white">Ready to transform your business?</h3>
-        <p className="text-neutral-400">
-          Join hundreds of companies leveraging AI to scale faster, create better, and stay ahead of the
-          competition.
-        </p>
-      </div>
-      <div className="flex flex-col sm:flex-row gap-4 md:justify-end">
-        <button className="px-6 py-3 bg-white text-black font-medium rounded-xl hover:bg-neutral-100 transition-colors duration-200 hover:shadow-lg">
-          Get started
-        </button>
-        <button className="px-6 py-3 bg-transparent text-white font-medium rounded-xl border border-neutral-700 hover:border-neutral-600 hover:bg-neutral-800 transition-all duration-200">
-          View case studies
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</section>
+      </section>
+    </>
   )
 }

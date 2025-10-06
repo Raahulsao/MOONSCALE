@@ -3,8 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import LazyVideo from "@/components/lazy-video"
 import { SiteHeader } from "@/components/site-header"
-import { Footer } from "@/components/footer"
-import ScrollReactiveCards from "@/components/scroll-reactive-cards"
+import  Footer  from "@/components/footer"
 
 const heroCards = [
   {
@@ -43,7 +42,7 @@ const featureCards = [
   {
     id: 1,
     title: "Image",
-    subtitle: "Create Stunning Visuals with Ease",
+    subtitle: "Design High-Quality Images That Impress",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -55,7 +54,7 @@ const featureCards = [
   {
     id: 2,
     title: "Video",
-    subtitle: "Produce High-Quality Video Content",
+    subtitle: "Craft Stunning Video Content for Your Brand",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <polygon points="23 7 16 12 23 17 23 7" />
@@ -65,29 +64,31 @@ const featureCards = [
   },
   {
     id: 3,
-    title: "Personalize",
-    subtitle: "Personalize your Character",
+    title: "UI/Design",
+    subtitle: "Build Clean, Modern UI with Exceptional Design",
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path d="M20 21v-2a4 4 0 11-8 0 4 4 0 018 0v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/>
+  <path d="M13.5 6.5h0M17.5 10.5h0M6.5 12.5h0M8.5 7.5h0"/>
+</svg>  
     ),
   },
   {
     id: 4,
-    title: "Add effects",
-    subtitle: "Enhance Videos with Trendy Effects",
+    title: "Full Stack Websites",
+    subtitle: "Build Custom Websites with Beautiful Design & Great UX",
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <path d="M2 8h20M10 4v4M6 4v4M2 4h20v16H2z"/>
+</svg>
+
+
     ),
   },
   {
     id: 5,
-    title: "Create character",
-    subtitle: "Create detailed characters with Imagin...",
+    title: "Character creation",
+    subtitle: "Create Unique AI Characters for Your Brand",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -96,13 +97,13 @@ const featureCards = [
   },
   {
     id: 6,
-    title: "Motion Transfer",
-    subtitle: "Watch your Characters Animated Perfo...",
+    title: "AI-Generated Animated Videos",
+    subtitle: "Create stunning animations using AI for ads, stories, and explainer videos.",
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-        <path d="M3 3v5h5" />
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <path d="M11 7.6l4 2.3-4 2.3V7.6zM12 17v4M8 21h8M2 3h20v14H2z"/>
+</svg>
+
     ),
   },
   {
@@ -122,21 +123,20 @@ const featureCards = [
   },
   {
     id: 8,
-    title: "Image studio",
-    subtitle: "Image generation tools",
+    title: "Social Media Graphics & Templates",
+    subtitle: "Design eye-catching posts and templates for all social platforms.",
     legacy: true,
     icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-        <circle cx="8.5" cy="8.5" r="1.5" />
-        <polyline points="21,15 16,10 5,21" />
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <path d="M14 2v4a2 2 0 0 0 2 2h4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9zM10 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM20 17l-1.3-1.3a2.4 2.4 0 0 0-3.4 0L9 22"/>
+</svg>
+
     ),
   },
   {
     id: 9,
-    title: "Video studio",
-    subtitle: "Video generation tools",
+    title: "Socila Media content",
+    subtitle: "reels, shorts, podcast and more content for your business",
     legacy: true,
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,6 +199,10 @@ const galleryImages = [
   { id: 4, src: "/images/art4.jpeg", height: "h-80" },
   { id: 5, src: "/images/art5.jpeg", height: "h-96" },
   { id: 6, src: "/images/art6.jpeg", height: "h-72" },
+  { id: 22, src: "/images/art41.jpeg", height: "h-80" },
+  { id: 23, src: "/images/art42.jpeg", height: "h-96" },
+  { id: 24, src: "/images/art43.jpeg", height: "h-72" },
+  { id: 25, src: "/images/art44.jpeg", height: "h-80" },
   { id: 7, src: "/images/art7.jpeg", height: "h-80" },
   { id: 8, src: "/images/art8.jpeg", height: "h-96" },
   { id: 9, src: "/images/art9.jpeg", height: "h-72" },
@@ -213,11 +217,7 @@ const galleryImages = [
   { id: 18, src: "/images/art18.jpeg", height: "h-72" },
   { id: 19, src: "/images/art19.jpeg", height: "h-80" },
   { id: 20, src: "/images/art20.jpeg", height: "h-96" },
-  { id: 21, src: "/images/art21.jpeg", height: "h-72" },
-  { id: 22, src: "/images/art22.jpeg", height: "h-80" },
-  { id: 23, src: "/images/art23.jpeg", height: "h-96" },
-  { id: 24, src: "/images/art24.jpeg", height: "h-72" },
-  { id: 25, src: "/images/art25.jpeg", height: "h-80" }, 
+  { id: 21, src: "/images/art21.jpeg", height: "h-72" },   
   { id: "contact", type: "contact", height: "h-90" },
 ]
 
@@ -286,16 +286,16 @@ export default function BlogPage() {
       "/images/art26.jpeg"
     ],
     2: [
-      "/urban-street-scene-with-person-walking.jpg",
-      "/creative-portrait-with-artistic-effects.jpg",
-      "/stylish-person-in-black-dress.jpg",
-      "/person-with-fire-effects.jpg"
+      "/images/art30.jpeg",
+      "/images/art32.jpeg",
+      "/images/art34.jpeg",
+      "/images/art35.jpeg"
     ],
     3: [
-      "/images/intuitive-1.png",
-      "/images/intuitive-2.png",
-      "/images/top-rated-1.png",
-      "/images/top-rated-2.png"
+      "/images/art36.jpeg",
+      "/images/art37.jpeg",
+      "/images/art38.jpeg",
+      "/images/art39.jpeg"
       
     ],
     4: [
@@ -305,10 +305,10 @@ export default function BlogPage() {
       "/creative-portrait-with-artistic-effects.jpg"
     ],
     5: [
-      "/creative-portrait-with-artistic-effects.jpg",
-      "/urban-street-scene-with-person-walking.jpg",
-      "/stylish-person-in-black-dress.jpg",
-      "/person-taking-selfie.png"
+      "/images/art30.jpeg",
+      "/images/art32.jpeg",
+      "/images/art34.jpeg",
+      "/images/art35.jpeg"
     ],
     6: [
       "/person-taking-selfie.png",
@@ -388,8 +388,14 @@ export default function BlogPage() {
       
       <main>
         {/* Hero Cards Section - Horizontal cards with left margin and hover effect only on image */}
-        <div className="container mx-auto px-6 py-12">
-          <div className="overflow-x-auto scrollbar-hide">
+        <div className="container mx-auto px-6 py-12 mt-24">
+          {/* Added custom CSS to hide scrollbar while maintaining scrolling functionality */}
+          <div className="overflow-x-auto" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+            <style jsx>{`
+              div::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
             <div className="flex gap-6 pb-4" style={{ minWidth: "min-content" }}>
               {heroCards.map((card, index) => (
                 <div 
@@ -397,7 +403,7 @@ export default function BlogPage() {
                   className="flex-shrink-0"
                   style={{ 
                     width: "500px",
-                    marginLeft: index === 0 ? "20px" : "0"
+                    marginLeft: index === 0 ? "100px" : "0"
                   }}
                 >
                   <div
@@ -440,18 +446,19 @@ export default function BlogPage() {
         {/* What will you create today? section with feature cards */}
         <div className="container mx-auto px-6 py-16">
           <h2 className="text-2xl font-semibold mb-8 text-white inline-block px-3 py-1 rounded">
-            What will you create today?
+            We Create, We Automate, We Scale
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Improved grid layout for better appearance */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {featureCards.map((card) => (
               <div
                 key={card.id}
-                className="flex items-start gap-4 cursor-pointer transition-all duration-200 hover:translate-x-1 group"
+                className="flex items-start gap-4 p-4 bg-gray-900/50 rounded-lg cursor-pointer transition-all duration-200 hover:bg-gray-800/50 hover:translate-x-1 group"
                 onMouseEnter={() => setHoveredFeature(card.id)}
                 onMouseLeave={() => setHoveredFeature(null)}
               >
-                <div className="text-gray-400 group-hover:text-purple-400 transition-all duration-200 flex-shrink-0 group-hover:scale-110">
+                <div className="text-gray-400 group-hover:text-purple-400 transition-all duration-200 flex-shrink-0 group-hover:scale-110 mt-1">
                   {card.icon}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -460,7 +467,7 @@ export default function BlogPage() {
                       {card.title}
                     </h3>
                     {card.legacy && (
-                      <span className="text-xs bg-gray-600 text-gray-300 px-2 py-0.5 rounded-full">LEGACY</span>
+                      <span className="text-xs bg-gray-700 text-gray-300 px-2 py-0.5 rounded-full">LEGACY</span>
                     )}
                   </div>
                   <p className="text-sm text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-200">
@@ -471,9 +478,6 @@ export default function BlogPage() {
             ))}
           </div>
         </div>
-
-        {/* Scroll Reactive Cards Section - Moved to below "What will you create today?" */}
-        <ScrollReactiveCards />
 
         {/* Gallery Section with 5-column Grid Layout */}
         <div className="container mx-auto px-6 py-16">
