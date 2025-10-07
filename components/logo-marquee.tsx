@@ -44,7 +44,7 @@ export function LogoMarquee() {
     <section className="bg-black py-12 overflow-hidden">
       <div className="mx-auto px-4">
         <h2 className="text-center text-sm text-gray-100 uppercase mb-10 tracking-wide">
-          Most Advanced AI Tools
+          Most Advanced AI Tools used by us
         </h2>
 
         {/* Marquee Container */}
