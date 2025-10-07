@@ -7,17 +7,18 @@ const ACCENT = "#a78bfa" // purple-400
 
 // Premium auto-changing images for each section
 const designImages = [
-  "/3d-product-animation-horizontal-1.jpg",
-  "/3d-product-animation-horizontal-2.jpg",
-  "/3d-product-animation-horizontal-3.jpg",
-  "/3d-product-animation-horizontal-4.jpg",
+  "/images/8.webp",
+  "/images/web9.webp",
+  "/images/web8.png",
+  "/images/web7.webp",
+  "/images/web6.jpg",
 ]
 
 const aiMediaImages = [
-  "/3d-product-animation-vertical-1.jpg",
-  "/3d-product-animation-vertical-2.jpg",
-  "/3d-product-animation-vertical-3.jpg",
-  "/3d-product-animation-square.jpg",
+  "/images/art46.jpeg",
+  "/images/art47.jpeg",
+  "/images/art48.jpeg",
+  "/images/art49.jpeg",
 ]
 
 const analyticsImages = [
@@ -160,11 +161,11 @@ function PremiumImageCard({ images, className = "" }: { images: string[]; classN
   return (
     <div className={`group relative overflow-hidden rounded-3xl bg-neutral-900 ${className}`}>
       {/* Image Container */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
+      <div className="relative aspect-[4:3] w-full overflow-hidden">
         <img
           src={images[currentIndex] || "/placeholder.svg"}
           alt="Feature showcase"
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
         />
         {/* Subtle Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -186,59 +187,56 @@ function PremiumImageCard({ images, className = "" }: { images: string[]; classN
 }
 
 function PremiumVideoCard({ className = "" }: { className?: string }) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  
+  // Using the same images as the AI media section
+  const videoImages = [
+   "/images/art46.jpeg",
+  "/images/art47.jpeg",
+  "/images/art48.jpeg",
+  "/images/art49.jpeg"
+  ]
 
-  const togglePlay = () => {
-    if (videoRef) {
-      if (isPlaying) {
-        videoRef.pause()
-      } else {
-        videoRef.play()
-      }
-      setIsPlaying(!isPlaying)
-    }
-  }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % videoImages.length)
+    }, 1500) // Change every 1.5 seconds
 
-  return (
-    <div className={`group relative overflow-hidden rounded-3xl bg-neutral-900 ${className}`}>
-      {/* Video Container */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
-        <video
-          ref={setVideoRef}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loop
-          muted
-          playsInline
-          poster="/3d-product-animation-horizontal-1.jpg"
-        >
-          <source src="/demo-video.mp4" type="video/mp4" />
-        </video>
+    return () => clearInterval(interval)
+  }, [])
 
-        {/* Play/Pause Overlay */}
-        <button
-          onClick={togglePlay}
-          className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/20 transition-colors duration-300"
-          aria-label={isPlaying ? "Pause video" : "Play video"}
-        >
-          <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 shadow-xl">
-            {isPlaying ? (
-              <Pause className="w-7 h-7 text-black" />
-            ) : (
-              <Play className="w-7 h-7 text-black ml-0.5" />
-            )}
+ return (
+  <section className="relative py-0 pt-0 mt-0 w-full bg-transparent">
+    {/* Background gradient */}
+    <div className="absolute inset-0 -z-10 bg-gradient-to-br from-purple-400/50 to-purple-400/50 dark:from-gray-900/50 dark:to-gray-800/50" />
+
+    <div className="container mx-auto px-4">
+      {/* Main card container (fills the height of screen & centers vertically) */}
+      <div className="relative h-screen w-full flex items-center justify-center">
+        <div className="relative w-[22vw] h-[80vh] aspect-[9/16] rounded-2xl overflow-hidden shadow-xl bg-neutral-900 group">
+          {/* Image */}
+          <img
+            src={videoImages[currentIndex] || "/images/art48.jpeg"}
+            alt="Feature showcase"
+            className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+          />
+
+          {/* Progress Indicators */}
+          <div className="absolute bottom-4 left-4 flex gap-2">
+            {videoImages.map((_, index) => (
+              <div
+                key={index}
+                className={`h-1 rounded-full transition-all duration-500 ${
+                  index === currentIndex ? "w-6 bg-white" : "w-1 bg-white/30"
+                }`}
+              />
+            ))}
           </div>
-        </button>
-      </div>
-
-      {/* Badge */}
-      <div className="absolute top-6 right-6">
-        <span className="px-3 py-1.5 bg-white text-black text-xs font-medium rounded-full shadow-lg">
-          Watch Demo
-        </span>
+        </div>
       </div>
     </div>
-  )
+  </section>
+)
 }
 
 function FeatureCard({
@@ -311,7 +309,9 @@ function FeatureCard({
       </div>
 
       {/* Logo Marquee - Below explore section - NO BACKGROUND CARD */}
-      <DoubleMarquee logos={logos} />
+      <div className="mt-12">
+  <LogoMarquee logos={logos} direction="left" />
+</div>
     </div>
   )
 }
@@ -424,7 +424,7 @@ export function NewFeatureSections() {
           </div>
 
           {/* Feature Cards */}
-          <div className="space-y-32 lg:space-y-40">
+          <div className="space-y-4 lg:space-y-8">
             {features.map((feature, index) => (
               <FeatureCard key={index} {...feature} />
             ))}
@@ -433,7 +433,7 @@ export function NewFeatureSections() {
           {/* Additional Services Banner */}
           <div className="mt-32 lg:mt-40">
             <div className="max-w-5xl mx-auto">
-              <div className="bg-neutral-900 rounded-3xl p-8 lg:p-12 border border-neutral-800">
+              <div className="bg-purple-400 rounded-3xl p-8 lg:p-12 border border-neutral-800">
                 <div className="text-center mb-8">
                   <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
                     More AI solutions for your business

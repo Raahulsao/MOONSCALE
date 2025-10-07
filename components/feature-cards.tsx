@@ -8,7 +8,7 @@ const features = [
   {
     category: "ADAPTABILITY",
     title: "Make the experience truly intuitive",
-    image: "/images/feature-cards.png",
+    image: "/images/art27.jpeg",
     description: "Seamless integration with cutting-edge technology",
   },
   {

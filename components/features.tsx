@@ -50,7 +50,7 @@ export function Features() {
             <div className="grid grid-cols-2 gap-4">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
-                  src="/images/intuitive-1.png"
+                  src="/images/art27.jpeg"
                   alt="Close-up smartphone camera module on textured leather back"
                   fill
                   className="object-cover"
@@ -60,7 +60,7 @@ export function Features() {
               </div>
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
-                  src="/images/intuitive-2.png"
+                  src="/images/art28.jpeg"
                   alt="Hand gripping textured phone back — macro detail"
                   fill
                   className="object-cover"
@@ -77,7 +77,7 @@ export function Features() {
           <CardHeader>
             <p className="text-[11px] tracking-widest text-neutral-400">CLIENT LOVE</p>
             <CardTitle className="mt-1 text-xl text-white">
-              Their work didn't just look good, it moved the needle — our audience felt the difference instantly.
+              We don’t just make things look good — we craft consistent character and product identities that align perfectly with each client’s vision.
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -93,14 +93,14 @@ export function Features() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <Image
-                src={"/images/top-rated-1.png"}
+                src={"/images/art45.png"}
                 width={280}
                 height={160}
                 alt="Product sketch concepts of backpack on paper"
                 className="h-full w-full rounded-xl border border-white/10 object-cover"
               />
               <Image
-                src={"/images/top-rated-2.png"}
+                src={"/images/art38.jpeg"}
                 width={280}
                 height={160}
                 alt="Backpacks on stage with Smartpack PRO lighting"
