@@ -3,7 +3,7 @@
 import "./masonry-demo.css"
 import MasonryGrid from "@/components/masonry-grid"
 import { SiteHeader } from "@/components/site-header"
-import { Footer } from "@/components/footer"
+import  Footer  from "@/components/footer"
 
 export default function MasonryDemoPage() {
   return (
