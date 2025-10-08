@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom CSS below */
+
 @layer base {
   * {
     @apply border-gray-200;
