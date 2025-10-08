@@ -7,10 +7,10 @@ const ACCENT = "#a78bfa" // purple-400
 
 // Premium auto-changing images for each section
 const designImages = [
-  "/images/8.webp",
-  "/images/web9.webp",
   "/images/web8.png",
-  "/images/web7.webp",
+  "/images/web8.png",
+  "/images/web8.png",
+  "/images/web8.png",
   "/images/web6.jpg",
 ]
 
